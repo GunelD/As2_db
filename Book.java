@@ -1,15 +1,14 @@
-import java.sql.Date;
-
 public class Book {
     private String bookId;
     private String title;
     private int quantityInStock;
     private double price;
-    private Date publishDate;
+    private String publishDate;
     private String genre;
     private String description;
 
-    public Book(String bookId, String title, int quantityInStock, double price, Date publishDate, String genre, String description) {
+    public Book(String bookId, String title, int quantityInStock, double price,
+                String publishDate, String genre, String description) {
         this.bookId = bookId;
         this.title = title;
         this.quantityInStock = quantityInStock;
@@ -51,11 +50,11 @@ public class Book {
         this.price = price;
     }
 
-    public Date getPublishDate() {
+    public String getPublishDate() {
         return publishDate;
     }
 
-    public void setPublishDate(Date publishDate) {
+    public void setPublishDate(String publishDate) {
         this.publishDate = publishDate;
     }
 
@@ -74,18 +73,4 @@ public class Book {
     public void setDescription(String description) {
         this.description = description;
     }
-
-    @Override
-    public String toString() {
-        return "Book{" +
-                "bookId='" + bookId + '\'' +
-                ", title='" + title + '\'' +
-                ", quantityInStock=" + quantityInStock +
-                ", price=" + price +
-                ", publishDate=" + publishDate +
-                ", genre='" + genre + '\'' +
-                ", description='" + description + '\'' +
-                '}';
-    }
 }
-

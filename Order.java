@@ -1,14 +1,14 @@
-import java.sql.Date;
-
 public class Order {
     private String orderId;
     private String customerId;
+    private String orderDate;
     private int quantityOrdered;
     private double totalAmount;
 
-    public Order(String orderId, String customerId, String bookId, int quantityOrdered, double totalAmount) {
+    public Order(String orderId, String customerId, String orderDate, int quantityOrdered, double totalAmount) {
         this.orderId = orderId;
         this.customerId = customerId;
+        this.orderDate = orderDate;
         this.quantityOrdered = quantityOrdered;
         this.totalAmount = totalAmount;
     }
@@ -29,6 +29,14 @@ public class Order {
         this.customerId = customerId;
     }
 
+    public String getOrderDate() {
+        return orderDate;
+    }
+
+    public void setOrderDate(String orderDate) {
+        this.orderDate = orderDate;
+    }
+
     public int getQuantityOrdered() {
         return quantityOrdered;
     }
@@ -44,14 +52,5 @@ public class Order {
     public void setTotalAmount(double totalAmount) {
         this.totalAmount = totalAmount;
     }
-
-    @Override
-    public String toString() {
-        return "Order{" +
-                "orderId='" + orderId + '\'' +
-                ", customerId='" + customerId + '\'' +
-                ", quantityOrdered=" + quantityOrdered +
-                ", totalAmount=" + totalAmount +
-                '}';
-    }
 }
+

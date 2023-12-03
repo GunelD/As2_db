@@ -1,14 +1,12 @@
-class Customer {
+public class Customer {
     private String customerId;
     private String customerName;
     private String email;
-    private String phoneNumber;
 
-    public Customer(String customerId, String customerName, String email, String phoneNumber) {
+    public Customer(String customerId, String customerName, String email) {
         this.customerId = customerId;
         this.customerName = customerName;
         this.email = email;
-        this.phoneNumber = phoneNumber;
     }
 
     public String getCustomerId() {
@@ -34,22 +32,5 @@ class Customer {
     public void setEmail(String email) {
         this.email = email;
     }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    @Override
-    public String toString() {
-        return "Customer{" +
-                "customerId='" + customerId + '\'' +
-                ", customerName='" + customerName + '\'' +
-                ", email='" + email + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                '}';
-    }
 }
+
