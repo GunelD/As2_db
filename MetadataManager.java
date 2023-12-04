@@ -26,19 +26,17 @@ public class MetadataManager {
 
     public static void showKeyInfo(Connection connection) throws SQLException {
         DatabaseMetaData metaData = connection.getMetaData();
-        ResultSet primaryKeys = metaData.getPrimaryKeys(null, null, "%");
+        ResultSet primaryKeys = metaData.getPrimaryKeys(null, null, null );
 
         System.out.println("Primary Keys:");
         while (primaryKeys.next()) {
             String tableName = primaryKeys.getString("TABLE_NAME");
             String columnName = primaryKeys.getString("COLUMN_NAME");
-            System.out.println("  " + tableName + ": " + columnName);
-        }
+            if (!tableName.startsWith("pg_")) {
+                System.out.println("  " + tableName + ": " + columnName);
+            }}
 
-        System.out.println();
-
-        ResultSet foreignKeys = metaData.getImportedKeys(null, null, "%");
-
+        ResultSet foreignKeys = metaData.getImportedKeys(null, null, null);
         System.out.println("Foreign Keys:");
         while (foreignKeys.next()) {
             String tableName = foreignKeys.getString("FKTABLE_NAME");

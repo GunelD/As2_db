@@ -1,5 +1,5 @@
 public class Book {
-    private String bookId;
+    private int bookId;
     private String title;
     private int quantityInStock;
     private double price;
@@ -7,8 +7,7 @@ public class Book {
     private String genre;
     private String description;
 
-    public Book(String bookId, String title, int quantityInStock, double price,
-                String publishDate, String genre, String description) {
+    public Book(int bookId, String title, int quantityInStock, double price, String publishDate, String genre, String description) {
         this.bookId = bookId;
         this.title = title;
         this.quantityInStock = quantityInStock;
@@ -18,11 +17,11 @@ public class Book {
         this.description = description;
     }
 
-    public String getBookId() {
+    public int getBookId() {
         return bookId;
     }
 
-    public void setBookId(String bookId) {
+    public void setBookId(int bookId) {
         this.bookId = bookId;
     }
 
@@ -72,5 +71,18 @@ public class Book {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "bookId=" + bookId +
+                ", title='" + title + '\'' +
+                ", quantityInStock=" + quantityInStock +
+                ", price=" + price +
+                ", publishDate='" + publishDate + '\'' +
+                ", genre='" + genre + '\'' +
+                ", description='" + description + '\'' +
+                '}';
     }
 }

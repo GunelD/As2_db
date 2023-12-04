@@ -7,7 +7,7 @@ public class BookManager {
     public static void createBook(Connection connection, Book book) {
         String insertBookQuery = "INSERT INTO Books VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement preparedStatement = connection.prepareStatement(insertBookQuery)) {
-            preparedStatement.setString(1, book.getBookId());
+            preparedStatement.setInt(1, book.getBookId());
             preparedStatement.setString(2, book.getTitle());
             preparedStatement.setInt(3, book.getQuantityInStock());
             preparedStatement.setDouble(4, book.getPrice());
@@ -49,7 +49,7 @@ public class BookManager {
     }
 
     private static Book mapResultSetToBook(ResultSet resultSet) throws SQLException {
-        String bookId = resultSet.getString("bookId");
+        int bookId = resultSet.getInt("bookId");
         String title = resultSet.getString("title");
         int quantityInStock = resultSet.getInt("quantityInStock");
         double price = resultSet.getDouble("price");
@@ -73,7 +73,7 @@ public class BookManager {
             preparedStatement.setString(4, book.getPublishDate());
             preparedStatement.setString(5, book.getGenre());
             preparedStatement.setString(6, book.getDescription());
-            preparedStatement.setString(7, book.getBookId());
+            preparedStatement.setInt(7, book.getBookId());
 
             int rowsUpdated = preparedStatement.executeUpdate();
             if (rowsUpdated > 0) {
@@ -86,10 +86,10 @@ public class BookManager {
         }
     }
 
-    public static void deleteBook(Connection connection, String bookId) {
+    public static void deleteBook(Connection connection, int bookId) {
         String deleteBookQuery = "DELETE FROM Books WHERE bookId = ?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(deleteBookQuery)) {
-            preparedStatement.setString(1, bookId);
+            preparedStatement.setInt(1, bookId);
 
             int rowsDeleted = preparedStatement.executeUpdate();
             if (rowsDeleted > 0) {
