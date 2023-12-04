@@ -1,5 +1,4 @@
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.List;
@@ -16,9 +15,17 @@ public class BookstoreApplication {
 
     public static void main(String[] args) {
         try (Connection connection = getConnection()) {
-            MetadataManager.showTableInfo(connection);
-            MetadataManager.showKeyInfo(connection);
+            List<Object[]> booksData = BookManager.getBooksData(connection);
+
+            for (Object[] bookData : booksData) {
+                for (Object value : bookData) {
+                    System.out.print(value + " ");
+                }
+                System.out.println();
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }}
+    }
+}
+

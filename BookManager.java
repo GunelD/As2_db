@@ -26,8 +26,8 @@ public class BookManager {
         }
     }
 
-    public static List<Book> getBooks(Connection connection) {
-        String selectBooksQuery = "SELECT b.*, a.authorName, c.customerName, o.orderDate " +
+    public static List<Object[]> getBooksData(Connection connection) {
+        String selectBooksQuery = "SELECT b.*, a.*, c.*, o.* " +
                 "FROM Books b " +
                 "LEFT JOIN Book_author ba ON b.bookId = ba.bookId " +
                 "LEFT JOIN Authors a ON ba.authorId = a.authorId " +
@@ -35,33 +35,37 @@ public class BookManager {
                 "LEFT JOIN Orders o ON bo.orderId = o.orderId " +
                 "LEFT JOIN Customers c ON o.customerId = c.customerId";
 
-        List<Book> books = new ArrayList<>();
+        List<Object[]> booksData = new ArrayList<>();
         try (PreparedStatement preparedStatement = connection.prepareStatement(selectBooksQuery);
              ResultSet resultSet = preparedStatement.executeQuery()) {
             while (resultSet.next()) {
-                Book book = mapResultSetToBook(resultSet);
-                books.add(book);
+                Object[] bookData = new Object[20];
+                bookData[0] = resultSet.getInt("bookId");
+                bookData[1] = resultSet.getString("title");
+                bookData[2] = resultSet.getInt("quantityInStock");
+                bookData[3] = resultSet.getDouble("price");
+                bookData[4] = resultSet.getString("publishDate");
+                bookData[5] = resultSet.getString("genre");
+                bookData[6] = resultSet.getString("description");
+                bookData[7] = resultSet.getString("authorId");
+                bookData[8] = resultSet.getString("authorName");
+                bookData[9] = resultSet.getString("customerId");
+                bookData[10] = resultSet.getString("customerName");
+                bookData[11] = resultSet.getString("email");
+                bookData[12] = resultSet.getString("orderId");
+                bookData[13] = resultSet.getString("orderDate");
+                bookData[14] = resultSet.getInt("quantityOrdered");
+                bookData[15] = resultSet.getDouble("totalAmount");
+
+                booksData.add(bookData);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return books;
+
+        return booksData;
     }
 
-    private static Book mapResultSetToBook(ResultSet resultSet) throws SQLException {
-        int bookId = resultSet.getInt("bookId");
-        String title = resultSet.getString("title");
-        int quantityInStock = resultSet.getInt("quantityInStock");
-        double price = resultSet.getDouble("price");
-        String publishDate = resultSet.getString("publishDate");
-        String genre = resultSet.getString("genre");
-        String description = resultSet.getString("description");
-        String authorName = resultSet.getString("authorName");
-        String customerName = resultSet.getString("customerName");
-        String orderDate = resultSet.getString("orderDate");
-
-        return new Book(bookId, title, quantityInStock, price, publishDate, genre, description);
-    }
 
     public static void updateBook(Connection connection, Book book) {
         String updateBookQuery = "UPDATE Books SET title = ?, quantityInStock = ?, price = ?, " +
@@ -85,6 +89,30 @@ public class BookManager {
             e.printStackTrace();
         }
     }
+
+    public static Book getBook(Connection connection, int bookId) throws SQLException {
+        String selectBookQuery = "SELECT * FROM Books WHERE bookId = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(selectBookQuery)) {
+            preparedStatement.setInt(1, bookId);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    int id = resultSet.getInt("bookId");
+                    String title = resultSet.getString("title");
+                    int quantityInStock = resultSet.getInt("quantityInStock");
+                    double price = resultSet.getDouble("price");
+                    String publishDate = resultSet.getString("publishDate");
+                    String genre = resultSet.getString("genre");
+                    String description = resultSet.getString("description");
+
+                    return new Book(id, title, quantityInStock, price, publishDate, genre, description);
+                } else {
+                    System.out.println("Book not found.");
+                    return null;
+                }
+            }
+        }
+    }
+
 
     public static void deleteBook(Connection connection, int bookId) {
         String deleteBookQuery = "DELETE FROM Books WHERE bookId = ?";
