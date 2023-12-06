@@ -2,9 +2,11 @@ public class BookOrder {
     private String bookId;
     private String orderId;
 
+
     public BookOrder(String bookId, String orderId) {
         this.bookId = bookId;
         this.orderId = orderId;
+
     }
 
     public String getBookId() {
@@ -22,4 +24,5 @@ public class BookOrder {
     public void setOrderId(String orderId) {
         this.orderId = orderId;
     }
+
 }

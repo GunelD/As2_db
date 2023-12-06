@@ -1,17 +1,17 @@
 public class BookAuthor {
-    private String bookId;
+    private Integer bookId;
     private String authorId;
 
-    public BookAuthor(String bookId, String authorId) {
+    public BookAuthor(Integer bookId, String authorId) {
         this.bookId = bookId;
         this.authorId = authorId;
     }
 
-    public String getBookId() {
+    public Integer getBookId() {
         return bookId;
     }
 
-    public void setBookId(String bookId) {
+    public void setBookId(Integer bookId) {
         this.bookId = bookId;
     }
 

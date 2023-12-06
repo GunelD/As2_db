@@ -4,10 +4,10 @@ import java.sql.SQLException;
 
 public class BookOrderManager {
 
-    public static void createBookInOrder(Connection connection, String bookId, String orderId) throws SQLException {
+    public static void createBookInOrder(Connection connection, Integer bookId, String orderId) throws SQLException {
         String createQuery = "INSERT INTO Book_Order VALUES (?, ?)";
         try (PreparedStatement preparedStatement = connection.prepareStatement(createQuery)) {
-            preparedStatement.setString(1, bookId);
+            preparedStatement.setInt(1, bookId);
             preparedStatement.setString(2, orderId);
 
             int rowsInserted = preparedStatement.executeUpdate();
@@ -19,10 +19,10 @@ public class BookOrderManager {
         }
     }
 
-    public static void deleteBookFromOrder(Connection connection, String bookId, String orderId) throws SQLException {
+    public static void deleteBookFromOrder(Connection connection, Integer bookId, String orderId) throws SQLException {
         String deleteQuery = "DELETE FROM Book_Order WHERE bookId = ? AND orderId = ?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(deleteQuery)) {
-            preparedStatement.setString(1, bookId);
+            preparedStatement.setInt(1, bookId);
             preparedStatement.setString(2, orderId);
 
             int rowsDeleted = preparedStatement.executeUpdate();

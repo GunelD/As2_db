@@ -5,10 +5,10 @@ import java.sql.SQLException;
 
 public class BookAuthorManager {
 
-    public static void linkBookToAuthor(Connection connection, String bookId, String authorId) throws SQLException {
-        String linkQuery = "INSERT INTO Book_Author VALUES (?, ?)";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(linkQuery)) {
-            preparedStatement.setString(1, bookId);
+    public static void CreateBookWithAuthor(Connection connection, Integer bookId, String authorId) throws SQLException {
+        String createQuery = "INSERT INTO Book_Author VALUES (?, ?)";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(createQuery)) {
+            preparedStatement.setInt(1, bookId);
             preparedStatement.setString(2, authorId);
 
             int rowsInserted = preparedStatement.executeUpdate();
@@ -20,10 +20,10 @@ public class BookAuthorManager {
         }
     }
 
-    public static void unlinkBookFromAuthor(Connection connection, String bookId, String authorId) throws SQLException {
-        String unlinkQuery = "DELETE FROM Book_Author WHERE bookId = ? AND authorId = ?";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(unlinkQuery)) {
-            preparedStatement.setString(1, bookId);
+    public static void DeleteBookWithAuthor(Connection connection, Integer bookId, String authorId) throws SQLException {
+        String deleteQuery = "DELETE FROM Book_Author WHERE bookId = ? AND authorId = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(deleteQuery)) {
+            preparedStatement.setInt(1, bookId);
             preparedStatement.setString(2, authorId);
 
             int rowsDeleted = preparedStatement.executeUpdate();

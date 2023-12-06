@@ -5,6 +5,7 @@ public class Order {
     private int quantityOrdered;
     private double totalAmount;
 
+
     public Order(String orderId, String customerId, String orderDate, int quantityOrdered, double totalAmount) {
         this.orderId = orderId;
         this.customerId = customerId;

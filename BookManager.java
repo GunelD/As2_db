@@ -26,7 +26,7 @@ public class BookManager {
         }
     }
 
-    public static List<Object[]> getBooksData(Connection connection) {
+    public static List<Object[]> retrieveBooksData(Connection connection) {
         String selectBooksQuery = "SELECT b.*, a.*, c.*, o.* " +
                 "FROM Books b " +
                 "LEFT JOIN Book_author ba ON b.bookId = ba.bookId " +
@@ -34,6 +34,7 @@ public class BookManager {
                 "LEFT JOIN Book_order bo ON b.bookId = bo.bookId " +
                 "LEFT JOIN Orders o ON bo.orderId = o.orderId " +
                 "LEFT JOIN Customers c ON o.customerId = c.customerId";
+
 
         List<Object[]> booksData = new ArrayList<>();
         try (PreparedStatement preparedStatement = connection.prepareStatement(selectBooksQuery);
