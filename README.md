@@ -67,5 +67,5 @@ FOREIGN KEY (bookId) REFERENCES Books
 5. Check the database connection.
 6. Open the BookstoreApplication class.
 7. Check the getConnection method and update the database connection details (URL, username, password) according to your setup.
-8. Run the BookstoreApplication class:
-This class contains the main method to execute the methods for CRUD operations which are provided in Manager classes(BookManager.java, AuthorManager.java etc)
+8. Run the BookstoreApplication class
+9. Choose any option you want to perform and press the corresponding number from the list in the user interface.
